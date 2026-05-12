@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧</title>
+</head>
+
+<body>
+    <h1>商品一覧</h1>
+    <!-- <form action="/products/new"><button>登録</button></form> -->
+     <a href="/farms">農場一覧</a>
+    <h2>登録フォーム</h2>
+    <form action="/products" method="POST">
+        <input type="text" placeholder="商品名" name="name">
+        <input type="text" placeholder="農場名" name="farm">
+        <input type="number" placeholder="価格" name="price">
+        <select name="category" id="">
+            <% for( let category of categories) { %>
+                <option value=<%=category %>>
+                    <%= category %>
+                </option>
+                <% } %>
+        </select>
+        <button>登録</button>
+    </form>
+    <hr>
+    <h2>カテゴリで絞り込み</h2>
+    <form action="/products">
+        <select name="category" id="select">
+            <% for( let category of categories) { %>
+                <option value=<%=category %>>
+                    <%= category %>
+                </option>
+                <% } %>
+        </select>
+        <button id="select">絞り込み</button>
+    </form>
+    <form action="/products">
+        <button>クリア</button>
+    </form>
+    <hr>
+    <ul>
+        <% for(let product of products) { %>
+            <li>
+                <%= product.name %>
+
+            </li>
+
+            <form action="/products/<%=  product.id %>" method="GET">
+                <button>詳細</button>
+            </form>
+            <% } %>
+    </ul>
+
+</body>
+
+</html>

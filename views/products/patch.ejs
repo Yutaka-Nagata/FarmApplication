@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>修正フォーム</h1>
+    <form action="/products/<%= product.id %>?_method=PATCH" method="POST" >
+        <input type="text" placeholder="商品名" name="name" value="<%= product.name %>">
+        <input type="text" placeholder="農場名" name="farm" value="<%= product.farm ? product.farm.name : "" %>">
+        <input type="number" placeholder="価格" name="price" value="<%= product.price %>">
+        <select name="category" id="">
+        <% for( let category of categories) { %>
+            <option value=<%= category %>  <%= category === product.category ? "selected" : "" %>>
+                <%= category %>
+            </option>
+        <% } %>
+        </select>
+        <button>完了</button>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>詳細ページ</h1>
+    <p>
+        <li>商品名： <%= product.name %>
+        </li>
+        <li>農場名： <% if (product.farm) { %>
+                <a href="/farms/<%= product.farm._id %>">
+                    <%= product.farm.name %>
+                </a>
+                <% } %>
+        </li>
+        <li> 値段： <%= product.price %>
+        </li>
+        <li>カテゴリー： <%= product.category %>
+        </li>
+    </p>
+    <form action="/products" method="GET">
+        <button>一覧に戻る</button>
+    </form>
+    <form action="/products/<%= product.id %>?_method=DELETE" method="POST">
+        <button>削除</button>
+    </form>
+    <form action="/products/<%= product.id %>/patch">
+        <button>編集</button>
+
+    </form>
+
+
+
+</body>
+
+</html>

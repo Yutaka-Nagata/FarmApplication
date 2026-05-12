@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farms</title>
+</head>
+<body>
+    <h1>農場一覧</h1>
+    <a href="/products">商品一覧</a>
+    <h2>農場新規登録</h2>
+    <form action="/farms" method="POST">
+        <input type="text" placeholder="農場名" name="name" required>
+        <input type="text" placeholder="場所" name="city" required>
+        <input type="email" placeholder="email" name="email" required>
+        <button>登録</button>
+    </form>
+    <hr>
+    <ul>
+        <% for(let farm of farms) { %>
+            <li>
+                <%= farm.name %>
+
+            </li>
+
+            <form action="/farms/<%=  farm._id %>">
+                <button>詳細</button>
+            </form>
+            <% } %>
+    </ul>
+</body>
+</html>

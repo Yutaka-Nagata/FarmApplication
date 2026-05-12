@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        <%= farm.name %>の詳細ページ
+    </h1>
+    <p>
+        <li>場所： <%= farm.city %>
+        </li>
+        <li> e-mail： <%= farm.email %>
+        </li>
+        <li>商品一覧： <% if (farm.products) { %>
+                <ul>
+                    <% for( let product of farm.products) { %>
+                        <li>
+                            <a href="/products/<%= product._id %>"><%= product.name %></a>
+                        </li>
+                        <% } %>
+                </ul>
+                <% } %>
+        </li>
+    </p>
+    <form action="/farms">
+        <button>一覧に戻る</button>
+    </form>
+    <form action="/farms/<%= farm._id %>?_method=DELETE" method="POST">
+        <button>削除</button>
+    </form>
+
+
+
+
+</body>
+
+</html>
