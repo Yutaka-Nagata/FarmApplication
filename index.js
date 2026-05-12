@@ -22,7 +22,9 @@ const { Product, categories } = require("./models/product")
 const Farm = require("./models/farm");
 const { indexOf } = require("../YelpCamp/seeds/cities");
 
-
+app.get("/", (req,res)=>{
+    res.redirect("/farms")
+})
 
 
 app.get("/farms", async (req, res) => {
@@ -86,9 +88,9 @@ app.post("/products", async (req, res) => {
 
     const farm = await Farm.findOne({ name: req.body.farm })
     if (!farm) return res.send("ファームが存在しません")//ファームがなかった場合、エラー処理
-    product.farm = farm;
+    product.farm = farm.id;
     await product.save()
-    farm.products.push(product)
+    farm.products.push(product._id)
     await farm.save();
 
 
@@ -135,8 +137,9 @@ app.patch("/products/:id", async (req, res) => {
 
 app.delete("/products/:id", async (req, res) => {
     const { id } = req.params;
-    const product = await Product.deleteOne({ _id: `${id}` });
-    console.log("商品の削除！",product);
+    const product = await Product.findByIdAndDelete(id);
+    const farm = await Farm.findById(product.farm)
+    await farm.updateOne({$pull: {products: product._id}})
     res.redirect("/products")
 
 });
